@@ -1,8 +1,7 @@
 {
     "name": "ramsey/conventional-commits",
-    "description": "A PHP library for creating and validating commit messages according to the Conventional Commits specification. Includes a CaptainHook action!",
-    "license": "MIT",
     "type": "library",
+    "description": "A PHP library for creating and validating commit messages according to the Conventional Commits specification. Includes a CaptainHook action!",
     "keywords": [
         "captainhook",
         "commit",
@@ -13,6 +12,7 @@
         "hook",
         "plugin"
     ],
+    "license": "MIT",
     "authors": [
         {
             "name": "Ben Ramsey",
@@ -26,7 +26,7 @@
         "composer-runtime-api": "^1.1 || ^2",
         "composer/composer": "^1.10.23 || ^2.1.9",
         "jawira/case-converter": "^3.3",
-        "opis/json-schema": "^2.2.0",
+        "opis/json-schema": "dev-master",
         "symfony/console": "^5.3.7 || ^6.0",
         "symfony/filesystem": "^5.1 || ^6.0",
         "symfony/polyfill-php80": "^1.15"
@@ -42,22 +42,6 @@
     "suggest": {
         "captainhook/captainhook": "Manage your project's Git hooks with CaptainHook, and use ramsey/conventional-commits in your commit-msg and prepare-commit-msg hooks."
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "autoload": {
-        "psr-4": {
-            "Ramsey\\CaptainHook\\": "src/CaptainHook/",
-            "Ramsey\\ConventionalCommits\\": "src/ConventionalCommits/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Ramsey\\Test\\": "tests/"
-        }
-    },
-    "bin": [
-        "bin/conventional-commits"
-    ],
     "config": {
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
@@ -84,6 +68,22 @@
             "command-prefix": "dev"
         }
     },
+    "autoload": {
+        "psr-4": {
+            "Ramsey\\CaptainHook\\": "src/CaptainHook/",
+            "Ramsey\\ConventionalCommits\\": "src/ConventionalCommits/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ramsey\\Test\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "bin": [
+        "bin/conventional-commits"
+    ],
     "scripts": {
         "test-functional": "./tests/bash-test tests/functional-tests.sh"
     }
