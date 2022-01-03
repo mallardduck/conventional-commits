@@ -35,6 +35,7 @@ use Ramsey\ConventionalCommits\Console\SymfonyStyleFactory;
 use Ramsey\ConventionalCommits\Exception\ConventionalException;
 use Ramsey\ConventionalCommits\Parser;
 use SebastianFeldmann\Git\Repository;
+use Throwable;
 
 /**
  * During the commit-msg Git hook, this validates the commit message according
@@ -70,12 +71,23 @@ class ValidateConventionalCommit implements Action, Constrained
         $message = $repository->getCommitMsg();
 
         try {
-            $parser = new Parser($this->findConfiguration(new Input($io), new Output($io), $options));
+            $parser = new Parser(
+                $this->findConfiguration(
+                    new Input($io),
+                    new Output($io),
+                    $options,
+                ),
+            );
             $parser->parse($message->getContent());
         } catch (ConventionalException $exception) {
             $this->writeErrorMessage($io);
 
             throw new ActionFailed('Validation failed.');
+        } catch (Throwable $throwable) {
+            // phpcs:disable
+            var_dump($throwable);
+            die;
+            // phpcs:enable
         }
     }
 
